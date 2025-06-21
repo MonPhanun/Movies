@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LayOut from "../pages/layOut";
 import Home from "../pages/Home";
 import MovieDetail from "../pages/MovieDetail";
+import LayOut from "../pages/LayOut";
 
 
 
@@ -12,7 +12,7 @@ const RouterPage = ()=>{
         <Routes>
             <Route element={<LayOut/>}>
                 <Route path='/' element={<Home/>}/>
-                <Route path='/detail' element={<MovieDetail/>}/>
+                <Route path='/detail/:id' element={<MovieDetail/>}/>
             </Route>
 
         </Routes>

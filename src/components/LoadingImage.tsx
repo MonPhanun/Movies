@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './../styles/loadingImage.scss'; // Adjust path based on your CSS file location
 
-const ImageWithSkeleton = ({ src="", alt="", width="", height=""}) => {
+const ImageWithSkeleton = ({ src="", alt="", width="", height="",imgClass=""}) => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -9,13 +9,11 @@ const ImageWithSkeleton = ({ src="", alt="", width="", height=""}) => {
   const handleImageLoad = () => {
     setLoading(false);
     setError(false); // Reset error if image loads after a previous error
-    console.log("handleImageLoad")
   };
 
   const handleImageError = () => {
     setLoading(false);
     setError(true);
-    console.log("handleImageError")
   };
 
   // Combine external classNames with component-specific ones
@@ -51,8 +49,8 @@ const ImageWithSkeleton = ({ src="", alt="", width="", height=""}) => {
         onLoad={handleImageLoad}
         onError={handleImageError}
         // Conditionally apply class to hide/show image
-        className={loading || error ? 'image-hidden' : 'image-loaded'}
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        className={loading || error ? 'image-hidden' : `image-loaded ${imgClass}`}
+        style={{ width: '100%', height: '100%', objectFit:'cover' }}
       />
     </div>
   );

@@ -24,10 +24,15 @@
 
 .movie-card:hover {
   cursor: pointer;
+  color: #3b4d6d;
   overflow: hidden !important;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px !important;
   img {
     transform: scale(0.98) !important;
   }
+}
+
+.link-style {
+  color: #1e293b;
 }

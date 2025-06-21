@@ -14,6 +14,7 @@ const contain:React.CSSProperties = {
 
 const name:React.CSSProperties = {
     whiteSpace: "nowrap",
+    fontWeight:"bold",
    overflow:"hidden",
    textOverflow:"ellipsis",
     textAlign:"start"
