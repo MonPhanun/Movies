@@ -1,0 +1,33 @@
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+}
+
+.container-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.dsc-video {
+  height: 40px;
+  text-align: start;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-lines: 3;
+  font-size: 12px;
+}
+
+.movie-card:hover {
+  cursor: pointer;
+  overflow: hidden !important;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px !important;
+  img {
+    transform: scale(0.98) !important;
+  }
+}
