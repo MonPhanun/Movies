@@ -9,7 +9,7 @@ export interface Results {
   adult: boolean;
   backdrop_path: string;
   genre_ids: Array<string>;
-  id: number;
+  id: string;
   original_language: string;
   original_title: string;
   overview: string;
