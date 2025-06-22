@@ -1,4 +1,4 @@
-.descripton {
+.descriptons {
   margin-top: 30px;
   display: flex;
 }
@@ -57,17 +57,27 @@
 }
 
 @media (max-width: 575.98px) {
-}
-
-@media (max-width: 767.98px) {
-  .descripton {
-    flex-direction: column;
+  .descriptons {
+    flex-direction: column !important;
 
     .skeleton-container {
       width: 100% !important;
     }
   }
-  .img {
+  .imgs {
+    display: block !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .descriptons {
+    flex-direction: column !important;
+
+    .skeleton-container {
+      width: 100% !important;
+    }
+  }
+  .imgs {
     display: block !important;
   }
 }

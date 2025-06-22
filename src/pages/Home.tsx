@@ -15,7 +15,7 @@ const homeContain: React.CSSProperties = {
   margin: "0 auto",
   display: "flex",
   flexWrap: "wrap",
-  justifyContent: "start",
+  justifyContent: "center",
   paddingTop: "20px",
   paddingBottom: "20px",
   gap: "10px",
@@ -164,7 +164,7 @@ const Home = () => {
         <>
           {page == 1 ? (
             <>
-              <div style={header}>
+              <div style={header} className="popular">
                 <div>Popular and playing in theaters now</div>
                 <div>
                   <Link to={"/playing"}>

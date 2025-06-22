@@ -16,8 +16,8 @@ interface Props {
 const MovieCardSwitch = (prop: Props) => {
   return (
     <>
-      <div className="descripton">
-        <div className="img">
+      <div className="descriptons">
+        <div className="imgs">
           <ImageWithSkeleton src={prop.src} height="270px" width="200px" />
         </div>
         <div className="dsc-name">
