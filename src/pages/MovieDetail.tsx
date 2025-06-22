@@ -98,7 +98,7 @@ const MovieDetail = () => {
                     );
                   })}
                 </div>
-                <div className="budget">Budget : {itemDetail?.budget}</div>
+                <div className="budget">Budget : {itemDetail?.budget} USD</div>
                 <div className="budget">
                   Vote Average : {itemDetail?.vote_average} |{" "}
                   {`(${itemDetail?.vote_count} votes)`}

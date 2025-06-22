@@ -6,6 +6,9 @@ import PaginationControls from "../components/Pagination";
 import { Link } from "react-router-dom";
 import PopularCard from "../components/PopularCard";
 import { useGlobalState } from "../globalState/globalState";
+import { getLocalStorage, setLocalStorage } from "../services/localStorage";
+import type { HomePageRestoreModel } from "../Models/homePageRestoreModel";
+import MovieCardSwitch from "../components/MovieCardSwitch";
 
 const homeContain: React.CSSProperties = {
   maxWidth: "1200px",
@@ -48,6 +51,7 @@ const Home = () => {
   const [movie, setMovie] = useState<MovieModel>();
   const [popular, setPopular] = useState<MovieModel>();
   const [page, setPage] = useState(1);
+  const [switchUI, setSwitchUI] = useState(false);
   //
   const [startPage, setStartPage] = useState(1);
   const [totalPage, setTotalPage] = useState(10);
@@ -80,12 +84,28 @@ const Home = () => {
   };
 
   useEffect(() => {
+    //get page to restore
+    getLocalStore();
+    // set base url image
     setBaseImg(import.meta.env.VITE_BASE_URL_IMG);
-    getMovies(page);
+    // get popular movies
     getPopularMovies();
 
     setGlobal(true);
   }, []);
+
+  const getLocalStore = () => {
+    const getLocal: HomePageRestoreModel = getLocalStorage("home");
+    if (getLocal) {
+      setPage(getLocal.page);
+      setStartPage(getLocal.startPage);
+      setTotalPage(getLocal.totalPage);
+      //get  movies
+      getMovies(getLocal.page);
+    } else {
+      getMovies(page);
+    }
+  };
 
   const pageChange = (val: number) => {
     setPage(val);
@@ -116,6 +136,13 @@ const Home = () => {
       setTotalPage(totalPage - 10);
       //
     }
+    const localStore = {
+      page: val,
+      startPage: startPage,
+      totalPage: totalPage,
+    } as HomePageRestoreModel;
+
+    setLocalStorage("home", localStore);
 
     scrollToTop();
   };
@@ -125,6 +152,10 @@ const Home = () => {
       top: 0,
       behavior: "smooth", // Smooth scrolling
     });
+  };
+
+  const onSwitchChange = () => {
+    setSwitchUI(!switchUI);
   };
 
   return (
@@ -165,20 +196,50 @@ const Home = () => {
           ) : (
             ""
           )}
-          <div style={header}> All Movie</div>
-          <div style={homeContain}>
-            {movie?.results.map((e) => (
-              <Link key={e.id} className="link-style" to={`/detail/${e.id}`}>
-                {" "}
-                <MovieCard
-                  id={e.id}
-                  url={`${bass_url_img}${e.poster_path}`}
-                  title={e.title}
-                  description={e.overview}
-                />
-              </Link>
-            ))}
+          <div style={header}>
+            <div> All Movie</div>
+            <div className="switch-contain">
+              Switch UI
+              <label className="switch">
+                <input type="checkbox" onChange={onSwitchChange} />
+                <span className="slider round"></span>
+              </label>
+            </div>
           </div>
+          {!switchUI ? (
+            <div style={homeContain}>
+              {movie?.results.map((e) => (
+                <Link key={e.id} className="link-style" to={`/detail/${e.id}`}>
+                  {" "}
+                  <MovieCard
+                    id={e.id}
+                    url={`${bass_url_img}${e.poster_path}`}
+                    title={e.title}
+                    description={e.overview}
+                  />
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div style={header}>
+              {movie?.results.map((e) => (
+                <Link key={e.id} className="link-style" to={`/detail/${e.id}`}>
+                  {" "}
+                  <MovieCardSwitch
+                    src={`${bass_url_img}${e.poster_path}`}
+                    title={e.title}
+                    release={e.release_date}
+                    country={""}
+                    runtime={90}
+                    budget={100}
+                    voteAverage={e.vote_average}
+                    voteCount={e.vote_count}
+                    overview={e.overview}
+                  />
+                </Link>
+              ))}
+            </div>
+          )}
         </>
       ) : (
         <Loading />
