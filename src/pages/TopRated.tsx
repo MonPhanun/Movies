@@ -4,7 +4,6 @@ import MovieCard from "../components/MovieCard";
 import type { MovieModel } from "../Models/movieModel";
 import PaginationControls from "../components/Pagination";
 import { Link } from "react-router-dom";
-import PopularCard from "../components/PopularCard";
 import { useGlobalState } from "../globalState/globalState";
 
 const homeContain: React.CSSProperties = {
@@ -18,35 +17,22 @@ const homeContain: React.CSSProperties = {
   gap: "10px",
 };
 
-const popularContain: React.CSSProperties = {
+const header: React.CSSProperties = {
   maxWidth: "1200px",
   margin: "0 auto",
   display: "flex",
   overflowX: "scroll",
   justifyContent: "start",
   paddingTop: "20px",
-  paddingBottom: "20px",
-  gap: "10px",
-};
-
-const header: React.CSSProperties = {
-  maxWidth: "1200px",
-  margin: "0 auto",
-  display: "flex",
-  flexWrap: "wrap",
-  overflowX: "scroll",
-  justifyContent: "space-between",
-  paddingTop: "20px",
   paddingBottom: "0px",
   fontSize: "22px",
   fontWeight: "bold",
 };
 
-const Home = () => {
+const TopRated = () => {
   const [bass_url_img, setBaseImg] = useState("");
   const [loading, setLoading] = useState(false);
   const [movie, setMovie] = useState<MovieModel>();
-  const [popular, setPopular] = useState<MovieModel>();
   const [page, setPage] = useState(1);
   //
   const [startPage, setStartPage] = useState(1);
@@ -56,7 +42,7 @@ const Home = () => {
 
   const getMovies = (page: number) => {
     fetch(
-      `${import.meta.env.VITE_BASE_URL_API}/3/discover/movie?api_key=${
+      `${import.meta.env.VITE_BASE_URL_API}/3/movie/top_rated?api_key=${
         import.meta.env.VITE_API_KEY
       }&page=${page}`
     )
@@ -67,22 +53,9 @@ const Home = () => {
       });
   };
 
-  const getPopularMovies = () => {
-    fetch(
-      `${import.meta.env.VITE_BASE_URL_API}/3/movie/now_playing?api_key=${
-        import.meta.env.VITE_API_KEY
-      }`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setPopular(json);
-      });
-  };
-
   useEffect(() => {
     setBaseImg(import.meta.env.VITE_BASE_URL_IMG);
     getMovies(page);
-    getPopularMovies();
 
     setGlobal(true);
   }, []);
@@ -131,41 +104,7 @@ const Home = () => {
     <>
       {loading ? (
         <>
-          {page == 1 ? (
-            <>
-              <div style={header}>
-                <div>Popular and playing in theaters now</div>
-                <div>
-                  <Link to={"/playing"}>
-                    <button className="btn-play">Playing Now</button>
-                  </Link>
-                  <Link to={"/toprated"}>
-                    <button className="btn-play">Top Rated</button>
-                  </Link>
-                </div>
-              </div>
-              <div style={popularContain}>
-                {popular?.results.map((e) => (
-                  <Link
-                    key={e.id}
-                    className="link-style"
-                    to={`/detail/${e.id}`}
-                  >
-                    {" "}
-                    <PopularCard
-                      id={e.id}
-                      url={`${bass_url_img}${e.poster_path}`}
-                      title={e.title}
-                      description={e.overview}
-                    />
-                  </Link>
-                ))}
-              </div>
-            </>
-          ) : (
-            ""
-          )}
-          <div style={header}> All Movie</div>
+          <div style={header}> Top Rated</div>
           <div style={homeContain}>
             {movie?.results.map((e) => (
               <Link key={e.id} className="link-style" to={`/detail/${e.id}`}>
@@ -196,4 +135,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default TopRated;

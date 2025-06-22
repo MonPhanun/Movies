@@ -13,6 +13,7 @@
     "dotenv": "^16.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hooks-global-state": "^2.1.0",
     "react-router-dom": "^7.6.2",
     "react-use-is-online": "^1.2.2",
     "scss": "^0.2.4"

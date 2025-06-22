@@ -4,6 +4,7 @@ import MoviewSearch from "./MoviewSearch";
 import { useState } from "react";
 import type { MovieSearchModel } from "../Models/movieSearchModel";
 import Loading from "./Loading";
+import { useGlobalState } from "../globalState/globalState";
 
 const Header = () => {
   //
@@ -11,6 +12,7 @@ const Header = () => {
   const [emty] = useState<MovieSearchModel>();
   const [input, serInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [useGlobal] = useGlobalState("search");
 
   //
   const getMovieSearch = (query: string) => {
@@ -21,7 +23,6 @@ const Header = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setMovie(json);
         setLoading(false);
       });
@@ -49,13 +50,17 @@ const Header = () => {
         <nav className="nav">
           <ul className="nav-links">
             <li>
-              <input
-                value={input}
-                type="text"
-                className="search"
-                placeholder="search . . ."
-                onChange={onChanges}
-              />
+              {useGlobal ? (
+                <input
+                  value={input}
+                  type="text"
+                  className="search"
+                  placeholder="search . . ."
+                  onChange={onChanges}
+                />
+              ) : (
+                ""
+              )}
             </li>
             {/*<li>
               <Link to={"/detail"}>
@@ -81,23 +86,20 @@ const Header = () => {
             <>
               {movie?.results.map((e) => {
                 return (
-                  <>
-                    <Link
-                      onClick={clearinput}
-                      key={e.id}
-                      className="link-style"
-                      to={`/detail/${e.id}`}
-                    >
-                      <MoviewSearch
-                        key={e.id}
-                        url={e.poster_path}
-                        title={e.title}
-                        average={e.vote_average}
-                        release={e.release_date}
-                        popular={e.popularity}
-                      />
-                    </Link>
-                  </>
+                  <Link
+                    onClick={clearinput}
+                    key={e.id}
+                    className="link-style"
+                    to={`/detail/${e.id}`}
+                  >
+                    <MoviewSearch
+                      url={e.poster_path}
+                      title={e.title}
+                      average={e.vote_average}
+                      release={e.release_date}
+                      popular={e.popularity}
+                    />
+                  </Link>
                 );
               })}
             </>

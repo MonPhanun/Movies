@@ -4,6 +4,7 @@ import type { MovieDetailModel } from "../Models/movieDetailModel";
 import Loading from "../components/Loading";
 import "./../styles/MovieDetail.scss";
 import ImageWithSkeleton from "../components/LoadingImage";
+import { useGlobalState } from "../globalState/globalState";
 
 const detailContain: React.CSSProperties = {
   display: "flex",
@@ -18,12 +19,14 @@ const MovieDetail = () => {
   const [bass_url_img, setBaseImg] = useState("");
   const [loading, setLoading] = useState(false);
   const [itemDetail, setItem] = useState<MovieDetailModel>();
+  //
+  const [, setGlobal] = useGlobalState("search");
 
   useEffect(() => {
+    setGlobal(false);
     setBaseImg(import.meta.env.VITE_BASE_URL_IMG);
     if (id) {
       getMovies(id);
-      //  getMoviesWatch(id)
     }
   }, []);
 
