@@ -46,6 +46,8 @@ h1 {
   padding: 0;
   margin: 0;
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -80,4 +82,25 @@ h1 {
   background-color: #0056b3;
   border-color: #0056b3;
   font-weight: bold;
+}
+
+@media (max-width: 575.98px) {
+}
+
+@media (max-width: 767.98px) {
+}
+
+@media (max-width: 991.98px) {
+  .pagination-button {
+    padding: 8px 14px;
+    font-size: 0.8em;
+    min-width: 30px; /* Ensure consistent width for numbers */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+}
+
+@media (max-width: 1199.98px) {
+}
+
+@media (max-width: 1399.98px) {
 }

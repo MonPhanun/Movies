@@ -36,3 +36,23 @@
 .link-style {
   color: #1e293b;
 }
+
+.for-online {
+  display: flex;
+  justify-content: center;
+  .online {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    background-color: #51985e93;
+    border-radius: 4px;
+  }
+
+  .offline {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fa838dae;
+    border-radius: 4px;
+  }
+}

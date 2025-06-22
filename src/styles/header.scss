@@ -21,11 +21,18 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .logo {
+  color: white;
   font-size: 1.8rem;
   font-weight: bold;
+}
+
+.logo:hover {
+  color: white !important;
+  cursor: pointer;
 }
 
 .nav {
@@ -61,4 +68,33 @@ body {
 
 .btn:hover {
   background-color: #2563eb;
+}
+
+.search {
+  min-width: 250px;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.search:focus {
+  border: none !important;
+  outline: none !important;
+}
+
+.result {
+  overflow-y: scroll;
+  position: absolute;
+  right: 0px;
+  top: 55px;
+  width: 300px;
+  max-height: 400px;
+  z-index: 20;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
