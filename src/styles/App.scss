@@ -33,6 +33,11 @@
   }
 }
 
+.movie-card:active {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+  border: 2px solid #27354cac;
+}
+
 .link-style {
   color: #1e293b;
 }

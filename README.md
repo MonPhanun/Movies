@@ -16,7 +16,7 @@
 - Implement segmented control to switch between list view and grid view. (done)
 - All images fade in.
 - Implement lazy load image. (done)
-- Customize the highlight and selection effect of the cell.
+- Customize the highlight and selection effect of the cell.(done)
 - Improve UX loading by skeleton loading.
 - Enhance responsive. (done)
 
